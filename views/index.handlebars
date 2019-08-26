@@ -4,7 +4,7 @@
   {{#each movies}}
     <li>
         <p> {{this.id}}. {{this.movie}} 
-        <button class="delmovie" data-movieId="{{this.id}}"> Delete </button>
+        <button class="delmovie" data-movieid="{{this.id}}"> Delete </button>
         </p>
     </li>
   {{/each}}
@@ -22,3 +22,23 @@
     <textarea name="movie" type="text" placeholder="what do you want to update this movie title to?" ></textarea>
     <button type="submit"> Update Movie!</button>
 </form>
+
+
+<script type="text/javascript">
+
+$(".delmovie").on("click", function(event){
+
+    var id = $(this).data("movieid");
+    
+    $.ajax("/api/movies/"+id, {
+        type: "DELETE"
+    }).then(function(){
+        
+        location.reload();
+    });
+});
+
+
+
+
+</script>
