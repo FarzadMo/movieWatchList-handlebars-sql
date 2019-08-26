@@ -38,6 +38,21 @@ $(".delmovie").on("click", function(event){
     });
 });
 
+$("#addmovie").on("submit", function(event){
+
+    event.preventDefault();
+    var newMovie = {
+        movie: $("#addmovie [name = movie]").val().trim()
+    } 
+    
+    $.ajax("/api/movies",{
+        type: "POST",
+        data: newMovie
+    }).then(function(){
+        location.reload();
+    });
+});
+
 
 
 

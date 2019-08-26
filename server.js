@@ -38,10 +38,11 @@ app.get("/", function(req, res){
         res.render("index", {movies: result});
     });
 });
- 
+
+//DELETE
 app.delete("/api/movies/:id", function(req, res){
     connection.query("DELETE FROM movies WHERE id = (?)", [req.params.id], function(err, result){
-        console.log("server delete result"+ result);
+        //console.log("server delete result"+ result);
         if(err){
             return res.status(500).end();
         }
@@ -52,6 +53,15 @@ app.delete("/api/movies/:id", function(req, res){
     });
 });
 
+//ADD NEW MOVIE
+app.post("/api/movies", function(req, res){
+    connection.query("INSERT INTO movies (movie) VALUES (?)", [req.body.movie], function(err, result){
+        if(err){
+            return res.status(500).end();
+        } 
+        res.json({ id: result.insertId });
+    });
+});
 
 
 
