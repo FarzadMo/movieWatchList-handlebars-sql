@@ -53,7 +53,24 @@ $("#addmovie").on("submit", function(event){
     });
 });
 
+$("#updatemovie").on("submit", function(event){
+    event.preventDefault();
 
+    var id= $("[name=id]").val().trim();
+
+    console.log("update section-->"+id);
+    var newMovie = {
+        movie: $("#updatemovie [name=movie]").val().trim()
+    }
+
+    $.ajax("/api/movies/"+id, {
+        type: "PUT",
+        data: newMovie
+    }).then(function(){
+        location.reload();
+    });
+});
 
 
 </script>
+
